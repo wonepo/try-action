@@ -19,4 +19,14 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             mkdir -p ~/project/static
-            ls -al ~
+
+      - name: Copy docker-compose.yml to Dir
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          source: "docker-compose.yml"
+          target: ~/project/static
