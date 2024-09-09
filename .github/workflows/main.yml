@@ -10,10 +10,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Create Directory on Server
-        uses: D3rHase/ssh-command-action@latest
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
-          user: ${{ secrets.USER }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
-          command: |
-            mkdir ~/project/static
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: |
+            whoami
+            ls -al
