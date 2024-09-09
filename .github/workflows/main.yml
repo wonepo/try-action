@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is Deploying on GitHub Actions 🚀
 on: [push]
 jobs:
   Job1:
-    name: Push Compose to Deploy Server
+    name: Push Compose to Deploy Server #1
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
