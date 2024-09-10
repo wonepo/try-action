@@ -1,14 +1,15 @@
-version: "3.3"
 services:
   custom:
-    image: wonli/app:2
+    env_file:
+    - .env
+    image: wonli/app:${TAG}
     container_name: "wonli-app"
     restart: always
     ports:
-      - "8090:80" # <Port exposed> : <MySQL Port running inside container>
+      - "8081:80" # <Port exposed> : <MySQL Port running inside container>
     networks:
       - app-network
 
 networks:
   app-network:
-    external: true
+    driver: bridge
