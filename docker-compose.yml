@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   custom:
-    image: wonli/app
+    image: wonli/app:2
     container_name: "wonli-app"
     restart: always
     ports:
