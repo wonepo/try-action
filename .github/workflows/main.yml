@@ -15,4 +15,4 @@ jobs:
           VERSION=$(cat version.txt)
 
       - name: Print Version For Debug Purpose
-        run: echo $VERSION
+        run: echo "repository  $VERSION"
