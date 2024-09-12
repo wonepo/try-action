@@ -15,5 +15,4 @@ jobs:
         run: env.VERSION = $(cat version.txt)
 
       - name: Print Version For Debug Purpose
-        run: echo "This is the current version : ${{ env.VERSION }}"
-
+        run: echo ${{ env.VERSION }}
