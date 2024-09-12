@@ -53,6 +53,8 @@ jobs:
       #   run: |
       #   mvn clean
       #   mvn - B package --file pom.xml
+      - name: Set up Version Var
+        run: echo "VERSION=$(cat version.txt)" >> $GITHUB_ENV
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -71,6 +73,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/app:$(cat version.txt)
+          tags: ${{secrets.DOCKER_USERNAME}}/app:$VERSION
 #          tags: ${{secrets.DOCKER_USERNAME}}/app:${{github.run_attempt}}
 
