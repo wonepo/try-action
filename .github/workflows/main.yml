@@ -1,8 +1,7 @@
 name: Deploy Static Web SiteGitHub
 run-name: ${{ github.actor }} is Deploying on GitHub Actions 🚀
 on: [push]
-env:
-  VERSION: ""
+
 jobs:
   Job1:
     name: Push Compose File to Deploy Server
@@ -12,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Read File and Set Variable
-        run: $VERSION = $(cat version.txt)
+        run: export VERSION = $(cat version.txt)
 
       - name: Print Version For Debug Purpose
-        run: echo ${{ env.VERSION }}
+        run: echo " $VERSION "
