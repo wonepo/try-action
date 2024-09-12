@@ -12,7 +12,7 @@ jobs:
 
       - name: Read File and Set Variable
         run: |
-          VERSION=$(<cat version.txt)
+          VERSION=$(cat version.txt)
 
       - name: Print Version For Debug Purpose
-        run: echo "$VERSION"
+        run: echo $VERSION
