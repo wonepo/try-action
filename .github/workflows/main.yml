@@ -84,7 +84,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/app:${{needs.Job1.outputs.output1}}
+          tags: ${{secrets.DOCKER_USERNAME}}/app:$OUTPUT1
   #          tags: ${{secrets.DOCKER_USERNAME}}/app:${{github.run_attempt}}
 
   Job3:
@@ -106,5 +106,5 @@ jobs:
             cd ~/project/static
             docker compose down -t 0 -v --rmi 'all'
             rm -f *.env
-            echo "TAG=${{needs.Job1.outputs.output1}}" >> .env
+            echo "TAG=$OUTPUT1" >> .env
             docker compose up -d
