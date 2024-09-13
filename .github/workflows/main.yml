@@ -6,6 +6,8 @@ jobs:
   Job1:
     name: Push Compose File to Deploy Server
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.read-file.outputs.version }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -77,10 +79,12 @@ jobs:
 
       - name: Build and Push to Docker Hub
         uses: docker/build-push-action@v6
+        env:
+          OUTPUT1: ${{needs.job1.outputs.output1}}
         with:
           context: .
           push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/app:${{ steps.read-file.outputs.version }}
+          tags: ${{secrets.DOCKER_USERNAME}}/app:$OUTPUT1
   #          tags: ${{secrets.DOCKER_USERNAME}}/app:${{github.run_attempt}}
 
   Job3:
@@ -90,6 +94,8 @@ jobs:
     steps:
       - name: Lauch Image
         uses: appleboy/ssh-action@master
+        env:
+          OUTPUT1: ${{needs.job1.outputs.output1}}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
@@ -100,5 +106,5 @@ jobs:
             cd ~/project/static
             docker compose down -t 0 -v --rmi 'all'
             rm *.env
-            echo "TAG=${{ steps.read-file.outputs.version }}" >> .env
+            echo "TAG=$OUTPUT1" >> .env
             docker compose up -d
