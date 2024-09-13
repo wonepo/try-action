@@ -10,11 +10,14 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      - name: Set Version 
+        run: |
+           output=`cat version.txt`
+           echo version=$output >> $GITHUB_OUTPUT
+
       - name: Get Version 
         run: |
-           output=$(cat version.txt)
-           echo "::set-output name=version::$output"
-           echo "Your version : ${{secrets.version}} "
+           echo "Your version : $version "
 
       - name: Create Directory on Server
         uses: appleboy/ssh-action@master
